@@ -1,3 +1,5 @@
+import Toybox.Lang;
+
 class AG2ComputeResult {
     var gradeFraction as Float = 0.0;
     var quality as Float = 0.0;

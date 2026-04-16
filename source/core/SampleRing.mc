@@ -1,3 +1,5 @@
+import Toybox.Lang;
+
 class AG2SampleRing {
     hidden var mValues as Array<Float> = [];
     hidden var mSize as Number = 0;

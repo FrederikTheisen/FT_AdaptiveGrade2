@@ -1,3 +1,5 @@
+import Toybox.Lang;
+
 class AG2MetricsAggregator {
     var distLightMeters as Float = 0.0;
     var distSteepMeters as Float = 0.0;

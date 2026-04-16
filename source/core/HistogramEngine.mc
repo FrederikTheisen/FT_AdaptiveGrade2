@@ -1,3 +1,5 @@
+import Toybox.Lang;
+
 class AG2HistogramEngine {
     hidden var mTrackedSeconds as Number = 0;
     hidden var mBestGradePercent as Float = 0.0;

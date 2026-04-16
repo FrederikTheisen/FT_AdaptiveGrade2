@@ -1,3 +1,5 @@
+import Toybox.Lang;
+
 class AG2Config {
     var sampleWindow as Number = 35;
     var minGradeWindow as Number = 7;

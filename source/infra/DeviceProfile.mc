@@ -1,4 +1,5 @@
 import Toybox.System;
+import Toybox.Lang;
 
 class AG2DeviceProfile {
     const X30_PARTNUMS = ["006-B3121-00", "006-B3122-00", "006-B2713-00", "006-B3570-00", "006-B3095-00", "006-B4169-00"];

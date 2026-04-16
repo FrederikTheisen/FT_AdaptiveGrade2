@@ -1,18 +1,19 @@
 import Toybox.Activity;
 import Toybox.Graphics;
 import Toybox.WatchUi;
+import Toybox.Lang;
 
 class AG2DataField extends WatchUi.DataField {
-    hidden var mConfig as AG2Config;
+    hidden var mConfig as AG2Config or Null;
     hidden var mSettingsStore as AG2SettingsStore;
-    hidden var mEngine as AG2GradeEngine;
-    hidden var mMetrics as AG2MetricsAggregator;
-    hidden var mHistogram as AG2HistogramEngine;
-    hidden var mFitWriter as AG2FitFieldWriter;
+    hidden var mEngine as AG2GradeEngine or Null;
+    hidden var mMetrics as AG2MetricsAggregator or Null;
+    hidden var mHistogram as AG2HistogramEngine or Null;
+    hidden var mFitWriter as AG2FitFieldWriter or Null;
     hidden var mLayoutClassifier as AG2LayoutClassifier;
     hidden var mViewModelMapper as AG2ViewModelMapper;
     hidden var mRenderer as AG2Renderer;
-    hidden var mCurrentResult as AG2ComputeResult;
+    hidden var mCurrentResult as AG2ComputeResult or Null;
     hidden var mCurrentLayout as Number;
 
     function initialize() {

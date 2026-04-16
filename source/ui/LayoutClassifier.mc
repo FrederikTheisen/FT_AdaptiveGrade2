@@ -1,5 +1,6 @@
 import Toybox.Graphics;
 import Toybox.System;
+import Toybox.Lang;
 
 class AG2LayoutClassifier {
     enum {

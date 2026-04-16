@@ -1,4 +1,5 @@
 import Toybox.Activity;
+import Toybox.Lang;
 
 class AG2GradeEngine {
     hidden var mGradeSamples as AG2SampleRing;

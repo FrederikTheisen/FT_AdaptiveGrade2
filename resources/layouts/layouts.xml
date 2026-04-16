@@ -1,0 +1,32 @@
+<layouts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <layout id="SmallNarrowLayout">
+        <drawable class="Background" />
+        <label id="title" x="50%" y="16%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="value" x="50%" y="50%" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_NUMBER_MEDIUM" />
+        <label id="status" x="50%" y="81%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+    </layout>
+
+    <layout id="SmallLayout">
+        <drawable class="Background" />
+        <label id="title" x="50%" y="14%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="value" x="50%" y="45%" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_NUMBER_MEDIUM" />
+        <label id="status" x="50%" y="74%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="meta" x="50%" y="90%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+    </layout>
+
+    <layout id="WideLayout">
+        <drawable class="Background" />
+        <label id="title" x="50%" y="10%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="value" x="50%" y="43%" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_NUMBER_MEDIUM" />
+        <label id="status" x="50%" y="68%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="meta" x="50%" y="88%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+    </layout>
+
+    <layout id="LargeLayout">
+        <drawable class="Background" />
+        <label id="title" x="50%" y="9%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="value" x="50%" y="32%" color="Graphics.COLOR_WHITE" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_NUMBER_HOT" />
+        <label id="status" x="50%" y="56%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_XTINY" />
+        <label id="meta" x="50%" y="71%" color="Graphics.COLOR_LT_GRAY" justification="Graphics.TEXT_JUSTIFY_CENTER|Graphics.TEXT_JUSTIFY_VCENTER" font="Graphics.FONT_SYSTEM_TINY" />
+    </layout>
+</layouts>

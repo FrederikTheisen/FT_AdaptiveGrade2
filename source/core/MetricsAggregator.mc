@@ -16,22 +16,28 @@ class AG2MetricsAggregator {
     }
 
     function apply(result as AG2ComputeResult, config as AG2Config) as Void {
-        if (!result.isActive) { return; }
+        if (!result.isActive) {
+            currentVam = 0.0;
+            return;
+        }
 
         currentVam = result.vam;
 
-        if (result.gradeFraction >= config.thresholdLight) {
+        if (shouldAccLightDist(result, config)) {
             distLightMeters += result.sampleDistanceMeters;
+        }
+
+        if (shouldAccAvgVam(result, config)) {
             mSumAscentVam += result.vam;
             mAscentSamples += 1;
             averageVam = mSumAscentVam / mAscentSamples;
         }
 
-        if (result.gradeFraction >= config.thresholdSteep) {
+        if (shouldAccSteepDist(result, config)) {
             distSteepMeters += result.sampleDistanceMeters;
         }
 
-        if (result.gradeFraction > maxGradeFraction) {
+        if (shouldCalcMaxGrade(result, config) && result.gradeFraction > maxGradeFraction) {
             maxGradeFraction = result.gradeFraction;
         }
 
@@ -47,5 +53,22 @@ class AG2MetricsAggregator {
     function resetLap() as Void {
         mLapGradeSum = 0.0;
         mLapGradeCount = 0;
+    }
+
+    hidden function shouldAccLightDist(result as AG2ComputeResult, config as AG2Config) as Boolean {
+        return result.gradeFraction >= config.thresholdLight && result.quality >= config.thresholdLogDist;
+    }
+
+    hidden function shouldAccSteepDist(result as AG2ComputeResult, config as AG2Config) as Boolean {
+        return result.gradeFraction >= config.thresholdSteep && result.quality >= config.thresholdLogDist;
+    }
+
+    hidden function shouldAccAvgVam(result as AG2ComputeResult, config as AG2Config) as Boolean {
+        return result.gradeFraction >= config.thresholdLight && result.quality >= config.thresholdLogDist;
+    }
+
+    hidden function shouldCalcMaxGrade(result as AG2ComputeResult, config as AG2Config) as Boolean {
+        if (result.quality < config.thresholdLogMax) { return false; }
+        return result.windowSize > config.minGradeWindow || result.windowSize == config.maxGradeWindow;
     }
 }

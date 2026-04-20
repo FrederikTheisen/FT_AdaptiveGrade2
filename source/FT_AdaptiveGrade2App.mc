@@ -25,7 +25,21 @@ class FT_AdaptiveGrade2App extends Application.AppBase {
 
     function getInitialView() as [Views] or [Views, InputDelegates] {
         view = new AG2DataField();
-        return [ view ];
+        var inputDelegate = new AG2InputDelegate(view);
+        return [ view, inputDelegate ];
+    }
+}
+
+class AG2InputDelegate extends WatchUi.InputDelegate {
+    hidden var mDataField as AG2DataField;
+
+    function initialize(dataField as AG2DataField) {
+        InputDelegate.initialize();
+        mDataField = dataField;
+    }
+
+    function onTap(clickEvent as WatchUi.ClickEvent) as Boolean {
+        return mDataField.handleTap(clickEvent);
     }
 }
 

@@ -2,11 +2,14 @@
     <string id="AppName">Adaptive Grade 2</string>
     <string id="Version">v4.0</string>
 
-    <string id="UI_Title_Grade">Adaptive Grade</string>
+    <string id="UI_Title_Grade">Adaptive Grade+</string>
+    <string id="UI_Title_Grade_Short">AG+</string>
     <string id="UI_Status_NoData">NO DATA</string>
     <string id="UI_Status_Buffering">BUFFERING</string>
     <string id="UI_Status_Active">ACTIVE</string>
     <string id="UI_Status_Reset">RESET</string>
+    <string id="UI_Status_FieldError">FIT LOG ERR</string>
+    <string id="UI_Status_LoggingDisabled">LOGGING DISABLED</string>
 
     <string id="UI_Meta_Template">MAX %1$ | VAM %2$</string>
 
@@ -51,6 +54,4 @@
 
     <string id="group_title_misc">Other Settings</string>
     <string id="group_desc_misc"></string>
-
-    <string id="simple_mode">Display Large Grade Number</string>
 </strings>

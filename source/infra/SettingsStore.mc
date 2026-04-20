@@ -40,9 +40,6 @@ class AG2SettingsStore {
         var smallFieldData = Application.Properties.getValue("small_field_data");
         if (smallFieldData instanceof Number) { config.smallFieldData = smallFieldData; }
 
-        var simpleMode = Application.Properties.getValue("simple_mode");
-        if (simpleMode instanceof Boolean) { config.simpleMode = simpleMode; }
-
         config.normalize();
         return config;
     }

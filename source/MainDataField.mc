@@ -15,6 +15,9 @@ class AG2DataField extends WatchUi.DataField {
     hidden var mRenderer as AG2Renderer;
     hidden var mCurrentResult as AG2ComputeResult or Null;
     hidden var mCurrentLayout as Number;
+    hidden var mCurrentGraphMode as Number;
+    hidden var mViewWidth as Number;
+    hidden var mViewHeight as Number;
 
     function initialize() {
         DataField.initialize();
@@ -24,6 +27,9 @@ class AG2DataField extends WatchUi.DataField {
         mViewModelMapper = new AG2ViewModelMapper();
         mRenderer = new AG2Renderer();
         mCurrentLayout = AG2LayoutClassifier.LAYOUT_SMALL;
+        mCurrentGraphMode = AG2_GRAPHMODE_BOTH;
+        mViewWidth = 0;
+        mViewHeight = 0;
 
         updateSettings();
     }
@@ -32,12 +38,15 @@ class AG2DataField extends WatchUi.DataField {
         mConfig = mSettingsStore.load();
         mEngine = new AG2GradeEngine(mConfig);
         mMetrics = new AG2MetricsAggregator();
-        mHistogram = new AG2HistogramEngine();
-        mFitWriter = new AG2FitFieldWriter();
+        mHistogram = new AG2HistogramEngine(mConfig.thresholdLogMax);
+        mFitWriter = new AG2FitFieldWriter(self, mConfig);
         mCurrentResult = new AG2ComputeResult();
+        mCurrentGraphMode = mConfig.graphMode;
     }
 
     function onLayout(dc as Dc) as Void {
+        mViewWidth = dc.getWidth();
+        mViewHeight = dc.getHeight();
         mCurrentLayout = mLayoutClassifier.detect(dc);
 
         switch (mCurrentLayout) {
@@ -58,21 +67,29 @@ class AG2DataField extends WatchUi.DataField {
     }
 
     function compute(info as Activity.Info) as Void {
-        mCurrentResult = mEngine.compute(info, mConfig);
+        mCurrentResult = mEngine.compute(info);
         mMetrics.apply(mCurrentResult, mConfig);
-        mHistogram.addGrade(mCurrentResult.gradeFraction * 100.0, mCurrentResult.quality);
+        if (mCurrentResult.isActive) {
+            mHistogram.addGrade(mCurrentResult.gradeFraction * 100.0, mCurrentResult.quality);
+            if (mHistogram.shouldUpdate()) {
+                mHistogram.compute();
+            }
+        }
         mFitWriter.syncRecord(mCurrentResult, mMetrics, mHistogram);
+        mFitWriter.syncLap(mMetrics);
     }
 
     function onUpdate(dc as Dc) as Void {
-        var model = mViewModelMapper.map(mCurrentResult, mMetrics, mHistogram, mCurrentLayout);
-        mRenderer.render(self, model, getBackgroundColor());
+        var bufferSnapshot = mEngine.getBufferSnapshot(mCurrentResult);
+        var histogramSnapshot = mHistogram.getSnapshot(mCurrentResult.gradeFraction * 100.0);
+        var model = mViewModelMapper.map(mCurrentResult, mMetrics, mHistogram, bufferSnapshot, histogramSnapshot, mConfig, mCurrentLayout, mCurrentGraphMode, mFitWriter);
+        mRenderer.prepare(self, model, getBackgroundColor());
         View.onUpdate(dc);
+        mRenderer.drawGraphs(dc, model, getBackgroundColor());
     }
 
     function onTimerLap() as Void {
         mMetrics.resetLap();
-        mFitWriter.syncLap(mMetrics);
     }
 
     function onTimerPause() as Void {
@@ -85,5 +102,24 @@ class AG2DataField extends WatchUi.DataField {
 
     function onTimerReset() as Void {
         updateSettings();
+    }
+
+    function handleTap(clickEvent as WatchUi.ClickEvent) as Boolean {
+        var shouldToggleGraph = false;
+
+        if (mCurrentLayout == AG2LayoutClassifier.LAYOUT_LARGE) {
+            var y = clickEvent.getCoordinates()[1];
+            if (y > mViewHeight / 2 - 5) {
+                shouldToggleGraph = true;
+            }
+        } else if (mCurrentLayout == AG2LayoutClassifier.LAYOUT_SMALL_NARROW) {
+            shouldToggleGraph = true;
+        }
+
+        if (!shouldToggleGraph) { return false; }
+
+        mCurrentGraphMode = (mCurrentGraphMode + 1) % 3;
+        WatchUi.requestUpdate();
+        return true;
     }
 }
